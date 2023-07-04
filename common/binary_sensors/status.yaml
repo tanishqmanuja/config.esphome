@@ -1,0 +1,7 @@
+# Usage:
+#   $friendly_name
+
+---
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"

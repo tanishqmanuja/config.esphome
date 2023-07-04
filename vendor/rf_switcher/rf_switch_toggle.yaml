@@ -1,0 +1,23 @@
+# Usage:
+#   $switch_name
+#   $switch_id
+#   $switch_code
+
+---
+- platform: template
+  id: ${switch_id}
+  name: ${switch_name}
+  turn_on_action:
+    - remote_transmitter.transmit_rc_switch_raw:
+        code: ${switch_code}
+        protocol: 1
+        repeat:
+          times: 6
+          wait_time: 0s
+  turn_off_action:
+    - remote_transmitter.transmit_rc_switch_raw:
+        code: ${switch_code}
+        protocol: 1
+        repeat:
+          times: 6
+          wait_time: 0s

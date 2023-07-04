@@ -1,0 +1,15 @@
+substitutions:
+  project: Node01
+  id: node01
+  hostname: node01
+  friendly_name: Node01
+  ip: 192.168.0.69
+
+packages:
+  base: !include ./common/base.yaml
+  esphome: !include ./common/esphome/esp01.yaml
+  disabled_logger: !include ./common/logger_disable.yaml
+  wifi: !include ./node01/wifi.yaml
+  status: !include ./common/binary_sensors/status.yaml
+  touchpad: !include ./node01/touchpad.yaml
+  led: !include ./node01/led.yaml

@@ -1,0 +1,85 @@
+---
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 32
+      mode: input_pulldown
+    name: "Kids Room Touch Switch"
+    id: "kids_room_touch_switch"
+    internal: true
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_multi_click:
+      # Single tap
+      - timing:
+          - ON for 40ms to 400ms
+          - OFF for at least 330ms
+        then:
+          - if:
+              condition:
+                api.connected:
+              then:
+                - homeassistant.event:
+                    event: esphome.touchpad_single_tap
+                    data:
+                      area: kids_bedroom
+                      message: Single Tap
+              else:
+                - button.press: kids_room_switcher_channel_b
+
+      # Double tap
+      - timing:
+          - ON for 40ms to 400ms
+          - OFF for 40ms to 300ms
+          - ON for 40ms to 400ms
+          - OFF for at least 330ms
+        then:
+          - if:
+              condition:
+                api.connected:
+              then:
+                - homeassistant.event:
+                    event: esphome.touchpad_double_tap
+                    data:
+                      area: kids_bedroom
+                      message: Double Tap
+              else:
+                - button.press: kids_room_switcher_channel_a
+
+      # Triple tap
+      - timing:
+          - ON for 40ms to 400ms
+          - OFF for 40ms to 300ms
+          - ON for 40ms to 400ms
+          - OFF for 40ms to 300ms
+          - ON for 40ms to 400ms
+          - OFF for at least 50ms
+        then:
+          - if:
+              condition:
+                api.connected:
+              then:
+                - homeassistant.event:
+                    event: esphome.touchpad_triple_tap
+                    data:
+                      area: kids_bedroom
+                      message: Triple Tap
+              else:
+                - button.press: kids_room_switcher_all_off
+
+      # Hold
+      - timing:
+          - ON for at least 1.7s
+        then:
+          - if:
+              condition:
+                api.connected:
+              then:
+                - homeassistant.event:
+                    event: esphome.touchpad_hold
+                    data:
+                      area: kids_bedroom
+                      message: Long Press
+              else:
+                - button.press: kids_room_switcher_all_off

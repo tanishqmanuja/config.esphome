@@ -1,0 +1,12 @@
+# Usage:
+#   $host_name
+
+---
+esphome:
+  name: $hostname
+
+esp32:
+  board: nodemcu-32s
+  framework:
+    type: arduino
+    version: recommended

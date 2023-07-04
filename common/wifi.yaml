@@ -1,0 +1,19 @@
+# Usage:
+#   $friendly_name
+
+---
+wifi:
+  ssid: !secret WIFI_SSID
+  password: !secret WIFI_PASSWORD
+  manual_ip:
+    static_ip: $ip
+    gateway: !secret ROUTER_GATEWAY
+    subnet: 255.255.255.0
+    dns1: !secret ROUTER_GATEWAY
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: ${friendly_name} Fallback AP
+    password: !secret ESPHOME_FALLBACK_AP_PASSWORD
+
+captive_portal:

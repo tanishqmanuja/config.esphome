@@ -1,0 +1,7 @@
+# Usage:
+#   $rf_tx_pin
+
+---
+remote_transmitter:
+  pin: ${rf_tx_pin}
+  carrier_duty_percent: 100%

@@ -1,0 +1,14 @@
+---
+api:
+  services:
+    - service: rf_bridge_send
+      variables:
+        code: string
+        repeat: int
+      then:
+        - remote_transmitter.transmit_rc_switch_raw:
+            protocol: 1
+            code: !lambda "return code;"
+            repeat:
+              times: !lambda "return repeat;"
+              wait_time: 0s

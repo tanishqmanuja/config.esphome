@@ -1,0 +1,58 @@
+---
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: input
+      inverted: true
+    name: "Art Room Touch Switch"
+    id: "art_room_touch_switch"
+    internal: true
+    filters:
+      - delayed_on: 20ms
+      - delayed_off: 20ms
+    on_multi_click:
+      # Double tap
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 1s
+          - ON for at most 1s
+          - OFF for at least 0.2s
+        then:
+          - homeassistant.event:
+              event: esphome.touchpad_double_tap
+              data:
+                area: art_room
+                message: Double Tap
+
+      # Long press
+      - timing:
+          - ON for 1s to 3s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.touchpad_long_press
+              data:
+                area: art_room
+                message: Long Press
+
+      # Hold
+      - timing:
+          - ON for at least 1.75s
+        then:
+          - homeassistant.event:
+              event: esphome.touchpad_hold
+              data:
+                area: art_room
+                message: Hold
+
+      # Single tap
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.touchpad_single_tap
+              data:
+                area: art_room
+                message: Single Tap

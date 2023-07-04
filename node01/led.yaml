@@ -1,0 +1,29 @@
+---
+light:
+  - platform: monochromatic
+    name: Neon LED Strip
+    output: led_output
+    restore_mode: ALWAYS_OFF
+    gamma_correct: 1.8
+    default_transition_length: 0.75s
+
+output:
+  - platform: esp8266_pwm
+    id: led_output
+    pin:
+      number: GPIO2
+      inverted: true
+    frequency: 100Hz
+    zero_means_zero: true
+# Binary Light
+# light:
+#   - platform: binary
+#     name: LED Strip
+#     output: led_output
+
+# output:
+#   - id: led_output
+#     platform: gpio
+#     pin:
+#       number: GPIO2
+#       inverted: true

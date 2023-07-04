@@ -1,0 +1,67 @@
+# Usage:
+#   $name
+#   $name_upper
+#   $code_a
+#   $code_b
+#   $code_c
+#   $code_d
+#   $code_on
+#   $code_off
+
+---
+switch:
+  - <<:
+      !include {
+        file: ./rf_switch_toggle.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} Channel A",
+            switch_id: "${name}_channel_a",
+            switch_code: "${code_a}",
+          },
+      }
+
+  - <<:
+      !include {
+        file: ./rf_switch_toggle.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} Channel B",
+            switch_id: "${name}_channel_b",
+            switch_code: "${code_b}",
+          },
+      }
+
+  - <<:
+      !include {
+        file: ./rf_switch_toggle.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} Channel C",
+            switch_id: "${name}_channel_c",
+            switch_code: "${code_c}",
+          },
+      }
+
+  - <<:
+      !include {
+        file: ./rf_switch_toggle.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} Channel D",
+            switch_id: "${name}_channel_d",
+            switch_code: "${code_d}",
+          },
+      }
+
+  - <<:
+      !include {
+        file: ./rf_switch_on_off.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} All",
+            switch_id: "${name}_all",
+            switch_code_on: "${code_on}",
+            switch_code_off: "${code_off}",
+          },
+      }

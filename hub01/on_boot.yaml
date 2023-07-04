@@ -1,0 +1,5 @@
+---
+esphome:
+  on_boot:
+    then:
+      - button.press: kids_room_switcher_channel_a

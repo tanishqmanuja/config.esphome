@@ -1,0 +1,8 @@
+# Usage:
+#   $friendly_name
+
+---
+sensor:
+  - platform: uptime
+    id: "${friendly_name}_uptime"
+    name: "${friendly_name} Uptime"

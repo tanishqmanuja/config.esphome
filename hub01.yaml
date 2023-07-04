@@ -1,0 +1,37 @@
+substitutions:
+  project: Hub01
+  id: hub01
+  hostname: hub01
+  friendly_name: Hub01
+  ip: 192.168.0.65
+
+packages:
+  base: !include ./common/base.yaml
+  esphome: !include ./common/esphome/nodemcu_32s.yaml
+  status: !include ./common/binary_sensors/status.yaml
+
+  wifi: !include ./hub01/wifi.yaml
+  # on_boot: !include ./hub01/on_boot.yaml
+
+  rf_transmitter:
+    !include {
+      file: ./common/devices/rf_transmitter.yaml,
+      vars: { rf_tx_pin: "16" },
+    }
+
+  services: !include ./hub01/services.yaml
+
+  kids_room_switcher:
+    !include {
+      file: ./vendor/rf_switcher/rf_button_group.yaml,
+      vars:
+        {
+          name: "kids_room_switcher",
+          name_upper: "Kids Room Switcher",
+          internal: true,
+          <<: !include ./vendor/rf_configs/kids_room.yaml,
+        },
+    }
+
+  touchpad: !include ./hub01/touchpad.yaml
+  led: !include ./hub01/led.yaml

@@ -1,0 +1,23 @@
+---
+light:
+  - platform: monochromatic
+    name: Neon LED Strip
+    output: led_output
+    restore_mode: ALWAYS_OFF
+    gamma_correct: 1.8
+    default_transition_length: 0.75s
+
+output:
+  - platform: ledc
+    id: led_output
+    pin: GPIO27
+    frequency: 100Hz
+    zero_means_zero: true
+    power_supply: led_relay
+
+power_supply:
+  - id: led_relay
+    pin:
+      number: GPIO26
+      inverted: true
+    keep_on_time: 20ms

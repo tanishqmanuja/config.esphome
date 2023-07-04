@@ -1,0 +1,78 @@
+# Usage:
+#   $name
+#   $name_upper
+#   $code_a
+#   $code_b
+#   $code_c
+#   $code_d
+#   $code_on
+#   $code_off
+#   $internal (implicitly passed !must be supplied)
+
+---
+button:
+  - <<:
+      !include {
+        file: ./rf_button.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} Channel A",
+            switch_id: "${name}_channel_a",
+            switch_code: "${code_a}",
+          },
+      }
+
+  - <<:
+      !include {
+        file: ./rf_button.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} Channel B",
+            switch_id: "${name}_channel_b",
+            switch_code: "${code_b}",
+          },
+      }
+
+  - <<:
+      !include {
+        file: ./rf_button.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} Channel C",
+            switch_id: "${name}_channel_c",
+            switch_code: "${code_c}",
+          },
+      }
+
+  - <<:
+      !include {
+        file: ./rf_button.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} Channel D",
+            switch_id: "${name}_channel_d",
+            switch_code: "${code_d}",
+          },
+      }
+
+  - <<:
+      !include {
+        file: ./rf_button.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} All On",
+            switch_id: "${name}_all_on",
+            switch_code: "${code_on}",
+          },
+      }
+
+  - <<:
+      !include {
+        file: ./rf_button.yaml,
+        vars:
+          {
+            switch_name: "${name_upper} All Off",
+            switch_id: "${name}_all_off",
+            switch_code: "${code_off}",
+          },
+      }
