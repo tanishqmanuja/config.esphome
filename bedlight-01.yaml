@@ -1,0 +1,44 @@
+substitutions:
+  IP: 192.168.0.69
+  DEVICE_NAME: bedlight01
+  FRIENDLY_NAME: Bed Light 01
+
+packages:
+  base: !include ./common/base.yaml
+  board: !include ./common/board/esp01.yaml
+  logger.disable: !include ./common/logger/disable.yaml
+  wifi.stable: !include ./common/wifi/stable.yaml
+
+output:
+  - platform: esp8266_pwm
+    id: led_output
+    pin:
+      number: GPIO2
+      inverted: true
+    frequency: 1000Hz
+    zero_means_zero: true
+
+light:
+  - platform: monochromatic
+    name: LED Strip
+    output: led_output
+    restore_mode: ALWAYS_ON
+    gamma_correct: 1.8
+    default_transition_length: 0.75s
+    effects:
+      - pulse:
+      - pulse:
+          name: "Fast Pulse"
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0%
+          max_brightness: 100%
+      - pulse:
+          name: "Slow Pulse"
+          update_interval: 2s
+      - pulse:
+          name: "Asymmetrical Pulse"
+          transition_length:
+            on_length: 1s
+            off_length: 500ms
+          update_interval: 1.5s
