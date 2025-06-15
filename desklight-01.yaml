@@ -21,6 +21,14 @@ wifi:
     - delay: 1s
     - wifi.enable:
 
+esphome:
+  on_boot:
+    priority: -100
+    then:
+      - light.turn_on:
+          id: led_strip
+          brightness: 50%
+
 output:
   - platform: esp8266_pwm
     id: led_strip_output
@@ -54,11 +62,19 @@ light:
           transition_length: 1.5s
           update_interval: 9s
       - pulse:
-          name: "Super Slow Glow Pulse"
+          name: "Slow Glow Pulse"
           transition_length: 1.5s
           update_interval: 9s
           min_brightness: 40%
           max_brightness: 75%
+      - pulse:
+          name: "Faded Glow Pulse"
+          transition_length:
+            on_length: 1s
+            off_length: 2s
+          update_interval: 4s
+          min_brightness: 20%
+          max_brightness: 40%
       - pulse:
           name: "Asymmetrical Pulse"
           transition_length:
